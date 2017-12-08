@@ -2,8 +2,9 @@
   <section class="container">
     <img class="logo" src="logo.png" />
     <p class="content">
-      I want my project to cost
-      <input v-model="cost" class="cost-input" placeholder="50.000$" />
+      I want my project to cost:
+      <el-input v-model="cost" class="input" placeholder="50.000$" />
+      <br />
       here is the specification:
       <span
         class="uploaded-file"
@@ -20,11 +21,11 @@
         upload file
       </file-upload>
     </p>
-    <div>
+    <p>
       <router-link class="button" to="questionnaire">
         Is it possible?
       </router-link>
-    </div>
+    </p>
   </section>
 </template>
 
@@ -72,24 +73,9 @@ export default {
   line-height: 50px;
 }
 
-.cost-input {
-  outline: none;
-  margin: 0 10px;
-  padding: 0 10px;
-  width: 120px;
-  height: 35px;
-  border: 1px solid #ccc;
-  background: $c-white;
-  border-radius: 2px;
-  font-size: 16px;
-  font-weight: bold;
-  text-align: right;
-
-  &::placeholder {
-    color: #ccc;
-  }
+.input {
+  width: auto;
 }
-
 .upload-button {
   display: inline-block;
   height: 35px;

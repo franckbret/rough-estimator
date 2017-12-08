@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <h1 class="title">Rough Estimator</h1>
+    <img class="logo" src="logo.png" />
     <p class="content">
       I want my project to cost
       <input v-model="cost" class="cost-input" placeholder="50.000$" />
@@ -54,9 +54,15 @@ export default {
 <style lang="scss" scoped>
 @import 'assets/styles/variables';
 
+.logo {
+  width: 250px;
+}
+
 .container {
   width: 500px;
-  margin: 50% auto 0;
+  position: relative;
+  margin: 0 auto;
+  top: 50vh;
   transform: translateY(-50%);
   text-align: center;
 }

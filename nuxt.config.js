@@ -39,5 +39,8 @@ module.exports = {
     }
   },
 
-  plugins: ['~/plugins/vue-upload-component']
+  plugins: [
+    '~/plugins/vue-upload-component',
+    '~/plugins/element'
+  ]
 }

@@ -36,12 +36,13 @@
           <el-input-number v-model="formData.pageCount" />
         </el-form-item>
         <el-form-item label="Features">
+           <el-checkbox-group v-model="formData.features">
           <el-checkbox
             v-for="feature in features"
-            v-model="formData.features[feature.id]"
             :label="feature.label"
             name="feature"
           />
+          </el-checkbox-group>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" :disabled="estimation <= 0" @click="onSubmit">Estimate</el-button>
@@ -65,7 +66,7 @@ export default {
         features: {}
       },
       features: [
-        { id: 'logging', label: 'Authorization/Authentication' },
+        { id: 'logging', label: 'Authorization' },
         { id: 'notifications', label: 'Notifications' },
         { id: 'fileUploading', label: 'File uploading' },
         { id: 'animation', label: 'Animation' },

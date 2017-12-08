@@ -5,3 +5,13 @@ body {
 .input-currency input {
   text-align: right;
 }
+.el-checkbox-group .el-checkbox {
+    float: left;
+    width: 190px;
+    padding-right: 20px;
+    margin: 0;
+    padding: 0;
+}
+ .el-checkbox-group .el-checkbox+.el-checkbox {
+    margin-left: 0;
+}

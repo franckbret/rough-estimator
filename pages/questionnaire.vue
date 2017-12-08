@@ -4,7 +4,7 @@
       <h1 class="title">
         Probably not
       </h1>
-      <p class="text">
+      <p>
         but if you tell us few more things, we might be able to give you a rough estimate
       </p>
       <el-form class="form" ref="form" :model="formData" label-width="120px">
@@ -33,7 +33,7 @@
           </el-checkbox-group>
         </el-form-item>
         <el-form-item label="Pages">
-          <el-input v-model="formData.pageCount" />
+          <el-input-number v-model="formData.pageCount" />
         </el-form-item>
         <el-form-item label="Features">
           <el-checkbox
@@ -111,8 +111,6 @@ export default {
   letter-spacing: 1px;
   font-size: 42px;
 }
-
-.text {}
 
 .form {
   margin-top: 30px;

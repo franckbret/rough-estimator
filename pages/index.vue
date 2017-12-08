@@ -3,7 +3,7 @@
     <img class="logo" src="logo.png" />
     <p class="content">
       I want my project to cost:
-      <el-input v-model="cost" class="input" placeholder="50.000$" />
+      <el-input v-model="cost" class="input input-currency" placeholder="50.000$" />
       <br />
       here is the specification:
       <span

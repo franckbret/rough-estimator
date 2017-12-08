@@ -34,6 +34,24 @@ export default {
   },
   data () {
     return {
+      formData: {
+        budget: false,
+        type: false,
+        development: false,
+        technology: false,
+        features: {
+          logging: false,
+          notifications: false,
+          fileUploading: false,
+          animation: false,
+          multiStepForms: false,
+          onboarding: false,
+          thirdPartyIntegration: false,
+          adminPanel: false,
+          encryption: false,
+          pageCount: false
+        }
+      },
       form: [
         { id: 'budget', label: 'Budget', type: 'input' },
         { id: 'type', label: 'App type', type: 'option' },

@@ -98,8 +98,7 @@ export default {
 <style lang="scss" scoped>
 .container {
   width: 500px;
-  min-height: 100vh;
-  margin: 0 auto;
+  margin: 40px auto;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -21,7 +21,7 @@
       </file-upload>
     </p>
     <div>
-      <router-link class="button" to="estimate">
+      <router-link class="button" to="questionnaire">
         Is it possible?
       </router-link>
     </div>

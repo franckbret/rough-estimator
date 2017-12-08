@@ -1,58 +1,117 @@
 <template>
   <section class="container">
+    <h1 class="title">Rough Estimator</h1>
+    <p class="content">
+      I want my project to cost
+      <input v-model="cost" class="cost-input" placeholder="50.000$" />
+      here is the specification:
+      <span
+        class="uploaded-file"
+        v-if="lastFile"
+      >
+        {{ lastFile }}
+      </span>
+      <file-upload
+        class="upload-button"
+        v-else
+        :value="files"
+        @input="updatetValue"
+      >
+        upload file
+      </file-upload>
+    </p>
     <div>
-      <logo/>
-      <h1 class="title">
-        rough-estimator
-      </h1>
-      <h2 class="subtitle">
-        Nuxt.js project
-      </h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">Documentation</a>
-        <a href="https://github.com/nuxt/nuxt.js" target="_blank" class="button--grey">GitHub</a>
-      </div>
+      <router-link class="button" to="estimate">
+        Is it possible?
+      </router-link>
     </div>
   </section>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-
 export default {
-  components: {
-    Logo
+  data () {
+    return {
+      cost: '',
+      files: []
+    }
+  },
+  computed: {
+    lastFile () {
+      return this.files[0] ? this.files[0].name : null
+    }
+  },
+  methods: {
+    updatetValue (value) {
+      this.files = value
+    }
   }
 }
 </script>
 
-<style>
+<style src="assets/styles/base.scss"></style>
+
+<style lang="scss" scoped>
+@import 'assets/styles/variables';
+
 .container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 500px;
+  margin: 50% auto 0;
+  transform: translateY(-50%);
   text-align: center;
 }
 
+.content {
+  margin-bottom: 30px;
+  line-height: 50px;
+}
+
+.cost-input {
+  outline: none;
+  margin: 0 10px;
+  padding: 0 10px;
+  width: 120px;
+  height: 35px;
+  border: 1px solid #ccc;
+  background: $c-white;
+  border-radius: 2px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: right;
+
+  &::placeholder {
+    color: #ccc;
+  }
+}
+
+.upload-button {
+  display: inline-block;
+  height: 35px;
+  padding: 0 10px;
+  line-height: 35px;
+  background: $c-white;
+  border-radius: 2px;
+  border: 1px solid #ccc;
+  vertical-align: middle;
+}
+
+.uploaded-file {
+  color: $c-primary;
+  font-style: italic;
+}
+
 .title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
+  margin: 0 0 30px 0;
+  font-size: 30px;
 }
 
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
+.button {
+  display: inline-block;
+  background: $c-primary;
+  color: $c-white;
+  border-radius: 2px;
+  padding: 12px 30px;
+  font-weight: bold;
+  text-decoration: none;
 }
 </style>

@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 module.exports = {
   /*
   ** Headers of the page
@@ -13,6 +15,7 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+
   /*
   ** Customize the progress bar color
   */
@@ -34,5 +37,7 @@ module.exports = {
         })
       }
     }
-  }
+  },
+
+  plugins: ['~/plugins/vue-upload-component']
 }

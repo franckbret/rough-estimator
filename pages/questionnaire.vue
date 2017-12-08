@@ -1,79 +1,95 @@
 <template>
   <section class="container">
     <div>
-      <h1 class="subtitle">
+      <h1 class="title">
         Probably not
       </h1>
-      <p>but if you tell us few more things, we might be able to give you a rough estimate</p>
-      <div>
-        <div v-for="item in form">
-
-          <form-element
-            v-if="!item.items"
-            :element="item"
+      <p class="text">
+        but if you tell us few more things, we might be able to give you a rough estimate
+      </p>
+      <el-form class="form" ref="form" :model="formData" label-width="120px">
+        <el-form-item label="Project type">
+          <el-checkbox-group v-model="formData.type">
+            <el-checkbox label="Desktop" name="type"></el-checkbox>
+            <el-checkbox label="PWA" name="type"></el-checkbox>
+          </el-checkbox-group>
+        </el-form-item>
+        <el-form-item label="Area">
+          <el-checkbox-group v-model="formData.development">
+            <el-checkbox label="Backend" name="development"></el-checkbox>
+            <el-checkbox label="Frontend" name="development"></el-checkbox>
+            <el-checkbox label="Design" name="development"></el-checkbox>
+          </el-checkbox-group>
+        </el-form-item>
+        <el-form-item label="Technologies">
+          <el-checkbox-group v-model="formData.technology">
+            <el-checkbox label="Ember" name="technology"></el-checkbox>
+            <el-checkbox label="Vue.js" name="technology"></el-checkbox>
+            <el-checkbox label="Angular" name="technology"></el-checkbox>
+            <el-checkbox label="React" name="technology"></el-checkbox>
+            <el-checkbox label="Rails" name="technology"></el-checkbox>
+            <el-checkbox label="Node.js" name="technology"></el-checkbox>
+            <el-checkbox label="Firebase" name="technology"></el-checkbox>
+          </el-checkbox-group>
+        </el-form-item>
+        <el-form-item label="Pages">
+          <el-input v-model="formData.pageCount" />
+        </el-form-item>
+        <el-form-item label="Features">
+          <el-checkbox
+            v-for="feature in features"
+            v-model="formData.features[feature.id]"
+            :label="feature.label"
+            name="feature"
           />
-
-          <form-section
-            v-else
-            :items="item.items"
-          />
-
-        </div>
-      </div>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" :disabled="estimation <= 0" @click="onSubmit">Estimate</el-button>
+        </el-form-item>
+      </el-form>
     </div>
   </section>
 </template>
 
 <script>
-import FormElement from '~/components/FormElement'
-import FormSection from '~/components/FormSection'
+import estimator from '../estimator'
+
 export default {
-  components: {
-    FormElement,
-    FormSection
-  },
   data () {
     return {
       formData: {
-        budget: false,
-        type: false,
-        development: false,
-        technology: false,
-        features: {
-          logging: false,
-          notifications: false,
-          fileUploading: false,
-          animation: false,
-          multiStepForms: false,
-          onboarding: false,
-          thirdPartyIntegration: false,
-          adminPanel: false,
-          encryption: false,
-          pageCount: false
-        }
+        type: [],
+        development: [],
+        technology: [],
+        pageCount: null,
+        features: {}
       },
-      form: [
-        { id: 'budget', label: 'Budget', type: 'input' },
-        { id: 'type', label: 'App type', type: 'option' },
-        { id: 'development', label: 'Development', type: 'option' },
-        { id: 'technology', label: 'Technologies', type: 'multiple' },
-        {
-          id: 'features',
-          label: 'Features',
-          items: [
-            { id: 'logging', label: 'Logging', type: 'checkbox' },
-            { id: 'notifications', label: 'Notifications', type: 'checkbox' },
-            { id: 'fileUploading', label: 'File uploading', type: 'checkbox' },
-            { id: 'animation', label: 'Animation', type: 'checkbox' },
-            { id: 'multiStepForms', label: 'Multi step forms', type: 'checkbox' },
-            { id: 'onboarding', label: 'Onboarding', type: 'checkbox' },
-            { id: 'thirdPartyIntegration', label: 'Third party integration', type: 'checkbox' },
-            { id: 'adminPanel', label: 'Admin panel', type: 'checkbox' },
-            { id: 'encryption', label: 'Encryption', type: 'checkbox' },
-            { id: 'pageCount', label: 'Page Count', type: 'number' }
-          ]
-        }
+      features: [
+        { id: 'logging', label: 'Authorization/Authentication' },
+        { id: 'notifications', label: 'Notifications' },
+        { id: 'fileUploading', label: 'File uploading' },
+        { id: 'animation', label: 'Animation' },
+        { id: 'multiStepForms', label: 'Multi step forms' },
+        { id: 'onboarding', label: 'Onboarding' },
+        { id: 'thirdPartyIntegration', label: 'Third party integration' },
+        { id: 'adminPanel', label: 'Admin panel' },
+        { id: 'encryption', label: 'Encryption' },
+        { id: 'chat', label: 'Chat' }
       ]
+    }
+  },
+  computed: {
+    estimation () {
+      return estimator(this.formData)
+    }
+  },
+  methods: {
+    onSubmit () {
+      const message = `You are doomed! It will take more than ${this.estimation / 4} months`
+
+      this.$alert(message, 'Whoops', {
+        confirmButtonText: 'OK, I got it'
+      })
     }
   }
 }
@@ -81,29 +97,26 @@ export default {
 
 <style lang="scss" scoped>
 .container {
+  width: 500px;
   min-height: 100vh;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
 }
 
 .title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, sans-serif; /* 1 */
-  display: block;
   font-weight: 300;
   font-size: 100px;
   color: #35495e;
   letter-spacing: 1px;
+  font-size: 42px;
 }
 
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
+.text {}
+
+.form {
+  margin-top: 30px;
 }
 
 </style>

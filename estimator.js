@@ -3,6 +3,7 @@ export const complexAppForm = {
   type: ['Desktop', 'PWA'], // Desktop is default
   development: ['Frontend', 'Backend', 'Design'],
   technology: ['Node.js', 'React'],
+  pageCount: 10,
   features: {
     logging: true,
     notifications: true,
@@ -12,8 +13,7 @@ export const complexAppForm = {
     onboarding: true,
     thirdPartyIntegration: true,
     adminPanel: true,
-    encryption: true,
-    pageCount: 10
+    encryption: true
   }
 }
 
@@ -22,6 +22,7 @@ export const landingPageForm = {
   type: ['Desktop', 'PWA'],
   development: ['Frontend'],
   technology: [],
+  pageCount: 1,
   features: {
     logging: false,
     notifications: false,
@@ -31,8 +32,7 @@ export const landingPageForm = {
     onboarding: false,
     thirdPartyIntegration: false,
     adminPanel: false,
-    encryption: false,
-    pageCount: 1
+    encryption: false
   }
 }
 
@@ -41,6 +41,7 @@ export const designForm = {
   type: ['Desktop', 'PWA'],
   development: ['Design'],
   technology: [],
+  pageCount: 5,
   features: {
     logging: false,
     notifications: false,
@@ -50,8 +51,7 @@ export const designForm = {
     onboarding: false,
     thirdPartyIntegration: false,
     adminPanel: false,
-    encryption: false,
-    pageCount: 5
+    encryption: false
   }
 }
 
@@ -75,7 +75,7 @@ export default function estimate (form) {
       totalEstimationInWeeks -= 0.2
     }
     // pages in general
-    totalEstimationInWeeks += (form.features.pageCount * 1)
+    totalEstimationInWeeks += (form.pageCount * 1)
   }
   if (form.development.includes('Backend')) {
     totalEstimationInWeeks += 4
@@ -113,6 +113,9 @@ export default function estimate (form) {
     totalEstimationInWeeks += 2
   }
   if (form.features.encryption) {
+    totalEstimationInWeeks += 1
+  }
+  if (form.features.chat) {
     totalEstimationInWeeks += 1
   }
 
